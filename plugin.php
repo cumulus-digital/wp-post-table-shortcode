@@ -2,12 +2,12 @@
 namespace CUMULUS\Wordpress\PostsTableShortcode;
 /**
  * Plugin Name: Post Table Shortcode
- * Plugin URI: https://github.com/cumulus-digital/wp-post-table-shortcode/
+ * Plugin URI: github.com/cumulus-digital/wp-post-table-shortcode
+ * GitHub Plugin URI: cumulus-digital/wp-post-table-shortcode
  * Description: Provides a Shortcode for including a simple table of posts
- * Version: 0.1
+ * Version: 0.2
  * Author: vena
  * License: UNLICENSED
- * GitHub Plugin URI: cumulus-digital/wp-post-table-shortcode
  */
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
