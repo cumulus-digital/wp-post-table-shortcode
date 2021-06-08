@@ -22,7 +22,7 @@ function post_table_shortcode($attr) {
     $attr = \shortcode_atts([
         'category' => null,
         'tag' => null,
-        'order' => 'asc',
+        'order' => 'desc',
         'orderby' => 'date',
         'before' => null,
         'after' => date('Y') - 1,
