@@ -27,20 +27,21 @@ function post_table_shortcode($attr) {
         'before' => null,
         'after' => date('Y') - 1,
         'max' => -1,
-        'date_format' => 'm/d/y'
+        'date_format' => 'n/j/y'
     ], $attr, 'post_table');
 
     $posts = (new \WP_Query([
-        'posts_per_page' => $attr['max'],
-        'orderby' => $attr['orderby'],
-        'order' => $attr['order'],
         'category_name' => $attr['category'],
+        'tag' => $attr['tag'],
         'date_query' => array(
             array(
                 'after' => $attr['after'],
                 'before' => $attr['before']
             )
-        )
+        ),
+        'orderby' => $attr['orderby'],
+        'order' => $attr['order'],
+        'posts_per_page' => $attr['max'],
     ]));
 
     ob_start();
