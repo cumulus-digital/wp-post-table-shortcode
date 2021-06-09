@@ -4,8 +4,9 @@ namespace CUMULUS\Wordpress\PostsTableShortcode;
  * Plugin Name: Post Table Shortcode
  * Plugin URI: https://github.com/cumulus-digital/wp-post-table-shortcode
  * GitHub Plugin URI: https://github.com/cumulus-digital/wp-post-table-shortcode
+ * Primary Branch: main
  * Description: Provides a Shortcode for including a simple table of posts
- * Version: 0.4
+ * Version: 0.5
  * Author: vena
  * License: UNLICENSED
  */
