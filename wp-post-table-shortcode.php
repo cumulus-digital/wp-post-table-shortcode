@@ -1,17 +1,21 @@
 <?php
+
 namespace CUMULUS\Wordpress\PostsTableShortcode;
+
 /**
  * Plugin Name: Post Table Shortcode
  * Plugin URI: https://github.com/cumulus-digital/wp-post-table-shortcode
  * GitHub Plugin URI: https://github.com/cumulus-digital/wp-post-table-shortcode
  * Primary Branch: main
  * Description: Provides a Shortcode for including a simple table of posts
- * Version: 0.5
+ * Version: 0.6
  * Author: vena
  * License: UNLICENSED
  */
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (! defined('ABSPATH')) {
+    exit;
+}
 
 const PLUGIN_NAME = 'wp-post-table-shortcode';
 const PREFIX = 'wp-post-table-shortcode';
@@ -19,7 +23,8 @@ const TXTDOMAIN = PREFIX;
 const BASEPATH = PLUGIN_NAME;
 const BASE_FILENAME = PLUGIN_NAME . DIRECTORY_SEPARATOR . 'plugin.php';
 
-function post_table_shortcode($attr) {
+function post_table_shortcode($attr)
+{
     $attr = \shortcode_atts([
         'category' => null,
         'tag' => null,
@@ -45,18 +50,23 @@ function post_table_shortcode($attr) {
         'posts_per_page' => $attr['max'],
     ]));
 
-    ob_start();
-?>
+    ob_start(); ?>
     <figure class="wp-block-table is-style-stripes">
         <table>
+            <thead style="display: none">
+                <tr>
+                    <th>Date</th>
+                    <th>Article Title</th>
+                </tr>
+            </thead>
             <tbody>
-                <?php while($posts->have_posts()): $posts->the_post(); ?>
+                <?php while ($posts->have_posts()): $posts->the_post(); ?>
                 <tr>
                     <td class="has-text-align-right" data-align="right">
                         <?php echo \get_the_date($attr['date_format']); ?>
                     </td>
                     <td>
-                        <?php the_title( sprintf( '<a href="%s">', \esc_url( \get_permalink() ) ), '</a>' ); ?>
+                        <?php the_title(sprintf('<a href="%s">', \esc_url(\get_permalink())), '</a>'); ?>
                     </td>
                 </tr>
                 <?php endwhile; ?>
