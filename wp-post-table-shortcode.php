@@ -8,7 +8,7 @@ namespace CUMULUS\Wordpress\PostsTableShortcode;
  * GitHub Plugin URI: https://github.com/cumulus-digital/wp-post-table-shortcode
  * Primary Branch: main
  * Description: Provides a Shortcode for including a simple table of posts
- * Version: 0.6
+ * Version: 0.7
  * Author: vena
  * License: UNLICENSED
  */
@@ -31,7 +31,7 @@ function post_table_shortcode($attr)
         'order' => 'desc',
         'orderby' => 'date',
         'before' => null,
-        'after' => date('Y') - 1,
+        'after' => '1 year ago',
         'max' => -1,
         'date_format' => 'n/j/y'
     ], $attr, 'post_table');
