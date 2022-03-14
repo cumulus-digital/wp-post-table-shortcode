@@ -8,7 +8,7 @@ namespace CUMULUS\Wordpress\PostsTableShortcode;
  * GitHub Plugin URI: https://github.com/cumulus-digital/wp-post-table-shortcode
  * Primary Branch: main
  * Description: Provides a Shortcode for including a simple table of posts
- * Version: 0.7
+ * Version: 0.8
  * Author: vena
  * License: UNLICENSED
  */
@@ -51,7 +51,15 @@ function post_table_shortcode($attr)
     ]));
 
     ob_start(); ?>
-    <figure class="wp-block-table is-style-stripes">
+    <figure class="wp-block-table is-style-stripes wp-post-table-shortcode">
+        <style>
+            .wp-post-table-shortcode td {
+                word-break: break-word;
+            }
+            .wp-post-table-shortcode td.post-table-date {
+                white-space: nowrap;
+            }
+        </style>
         <table>
             <thead style="display: none">
                 <tr>
@@ -62,10 +70,10 @@ function post_table_shortcode($attr)
             <tbody>
                 <?php while ($posts->have_posts()): $posts->the_post(); ?>
                 <tr>
-                    <td class="has-text-align-right" data-align="right">
+                    <td class="has-text-align-right post-table-date" data-align="right">
                         <?php echo \get_the_date($attr['date_format']); ?>
                     </td>
-                    <td>
+                    <td class="post-table-title">
                         <?php the_title(sprintf('<a href="%s">', \esc_url(\get_permalink())), '</a>'); ?>
                     </td>
                 </tr>
