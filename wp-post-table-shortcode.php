@@ -8,7 +8,7 @@ namespace CUMULUS\Wordpress\PostsTableShortcode;
  * GitHub Plugin URI: https://github.com/cumulus-digital/wp-post-table-shortcode
  * Primary Branch: main
  * Description: Provides a Shortcode for including a simple table of posts
- * Version: 0.8
+ * Version: 0.9
  * Author: vena
  * License: UNLICENSED
  */
@@ -33,7 +33,8 @@ function post_table_shortcode($attr)
         'before' => null,
         'after' => '1 year ago',
         'max' => -1,
-        'date_format' => 'n/j/y'
+        'date_format' => 'n/j/y',
+        'add_class' => null,
     ], $attr, 'post_table');
 
     $posts = (new \WP_Query([
@@ -51,15 +52,7 @@ function post_table_shortcode($attr)
     ]));
 
     ob_start(); ?>
-    <figure class="wp-block-table is-style-stripes wp-post-table-shortcode">
-        <style>
-            .wp-post-table-shortcode td {
-                word-break: break-word;
-            }
-            .wp-post-table-shortcode td.post-table-date {
-                white-space: nowrap;
-            }
-        </style>
+    <figure class="wp-block-table is-style-stripes wp-post-table-shortcode <?php echo \esc_attr($attr['add_class']); ?>">
         <table>
             <thead style="display: none">
                 <tr>
@@ -88,3 +81,27 @@ function post_table_shortcode($attr)
     return $output;
 }
 \add_shortcode('posts-table', __NAMESPACE__ . '\\post_table_shortcode');
+
+/**
+ * Include styles
+ */
+function test_for_shortcode($template) {
+    if (\is_single() || \is_page()) {
+          global $post;
+          if (\has_shortcode($post->post_content, 'posts-table')) {
+              \add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_styles');
+          }
+    }
+    return $template;
+}
+function enqueue_styles() {
+    \wp_register_style(
+        PREFIX . '_style',
+        \plugins_url('styles.css', __FILE__),
+        [],
+        null,
+        'all'
+    );
+    \wp_enqueue_style( PREFIX . '_style' );
+}
+\add_action('template_include', __NAMESPACE__ . '\\test_for_shortcode');
