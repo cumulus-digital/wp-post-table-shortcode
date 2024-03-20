@@ -8,7 +8,7 @@ namespace CUMULUS\Wordpress\PostsTableShortcode;
  * GitHub Plugin URI: https://github.com/cumulus-digital/wp-post-table-shortcode
  * Primary Branch: main
  * Description: Provides a Shortcode for including a simple table of posts
- * Version: 0.11
+ * Version: 0.12
  * Author: vena
  * License: UNLICENSED
  */
@@ -77,7 +77,7 @@ function post_table_shortcode($attr)
 <?php
     $output = ob_get_clean();
     \wp_reset_postdata();
-    \wp_enqueue_style( PREFIX . '_style' );
+    \wp_enqueue_style(PREFIX . '_style');
 
     return $output;
 }
@@ -86,7 +86,8 @@ function post_table_shortcode($attr)
 /**
  * Include styles
  */
-function register_styles() {
+function register_styles()
+{
     \wp_register_style(
         PREFIX . '_style',
         \plugins_url('styles.css', __FILE__),
@@ -95,4 +96,4 @@ function register_styles() {
         'all'
     );
 }
-\add_action( 'init', __NAMESPACE__ . '\\register_styles' );
+\add_action('init', __NAMESPACE__ . '\\register_styles');
